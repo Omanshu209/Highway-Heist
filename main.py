@@ -16,6 +16,12 @@ HEAD_X = 100
 HEAD_Y = 100
 WHEEL_X = 40
 WHEEL_Y = 40
+CONTROL_R_X = 150
+CONTROL_R_Y = 105
+CONTROL_L_X = 150
+CONTROL_L_Y = 105
+CONTROL_B_X = 90
+CONTROL_B_Y = 130
 RUN = True
 FPS = 30
 CLOCK = pygame.time.Clock()
@@ -29,6 +35,9 @@ CAR_LEFT = pygame.transform.scale(pygame.image.load("assets/images/carLeft.png")
 HEAD_RIGHT = pygame.transform.scale(pygame.image.load("assets/images/headRight.png"),(HEAD_X,HEAD_Y))
 HEAD_LEFT = pygame.transform.scale(pygame.image.load("assets/images/headLeft.png"),(HEAD_X,HEAD_Y))
 WHEEL = pygame.transform.scale(pygame.image.load("assets/images/wheel.png"),(WHEEL_X,WHEEL_Y))
+CONTROL_R = pygame.transform.scale(pygame.image.load("assets/images/right.png"),(CONTROL_R_X,CONTROL_R_Y))
+CONTROL_L = pygame.transform.scale(pygame.image.load("assets/images/left.png"),(CONTROL_L_X,CONTROL_L_Y))
+CONTROL_B = pygame.transform.scale(pygame.image.load("assets/images/break.png"),(CONTROL_B_X,CONTROL_B_Y))
 
 # creating the window
 WIN = pygame.display.set_mode((X,Y))
@@ -159,12 +168,18 @@ def displaySignBoards():
 	SB3.fall()
 	SB4.fall()
 	SB5.fall()
+	
+def displayControls():
+	WIN.blit(CONTROL_L,(100,580))
+	WIN.blit(CONTROL_R,(970,580))
+	WIN.blit(CONTROL_B,(550,580))
 
 def UpdateGameWindow():
 	newFrame()
 	displayCoins()
 	displaySignBoards()
 	CAR1.move()
+	displayControls()
 	pygame.display.update()
 
 while RUN:
@@ -173,6 +188,17 @@ while RUN:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			RUN = False
+		if event.type == pygame.MOUSEBUTTONDOWN:
+			MX,MY = pygame.mouse.get_pos()
+			if MX >= 90 and MX <= 260 and MY >= 570 and MY <= 700:
+				CAR1.RIGHT = False
+				CAR1.LEFT = True
+			elif MX >= 960 and MX <= 1130 and MY >= 570 and MY <= 700:
+				CAR1.LEFT = False
+				CAR1.RIGHT = True
+			elif MX >= 540 and MX <= 650 and MY >= 570 and MY <= 720:
+				CAR1.LEFT = False
+				CAR1.RIGHT = False
 			
 	UpdateGameWindow()
 
