@@ -42,9 +42,14 @@ CONTROL_R = pygame.transform.scale(pygame.image.load("assets/images/right.png"),
 CONTROL_L = pygame.transform.scale(pygame.image.load("assets/images/left.png"),(CONTROL_L_X,CONTROL_L_Y))
 CONTROL_B = pygame.transform.scale(pygame.image.load("assets/images/break.png"),(CONTROL_B_X,CONTROL_B_Y))
 
+# loading audios
+ENGINE_SOUND = pygame.mixer.Sound("assets/audios/EngineSound.ogg")
+COIN_SOUND = pygame.mixer.Sound("assets/audios/Coin.wav")
+
 # creating the window
 WIN = pygame.display.set_mode((X,Y))
 
+# setting the caption of the window
 pygame.display.set_caption("Car Controlling Game!")
 
 # creating a class 'coin'
@@ -97,10 +102,15 @@ class car:
 		self.PREV = "RIGHT"
 		self.ANGLE = 10
 		self.WHEEL = pygame.transform.scale(pygame.transform.rotate(WHEEL,0),(WHEEL_X,WHEEL_Y))
+		self.SOUND_TIMER = 0
 		
 	def move(self):
 		global WHEEL
 		if self.RIGHT:
+			if self.SOUND_TIMER == 0:
+				ENGINE_SOUND.play()
+				self.SOUND_TIMER = 5
+			self.SOUND_TIMER -= 1
 			self.PREV = "RIGHT"
 			WIN.blit(CAR_RIGHT,(self.X,self.Y))
 			WIN.blit(pygame.transform.rotate(WHEEL,self.ANGLE),(self.X+20,self.Y+65))
@@ -113,6 +123,10 @@ class car:
 					self.ANGLE -= 10
 				self.X += self.SPEED
 		elif self.LEFT:
+			if self.SOUND_TIMER == 0:
+				ENGINE_SOUND.play()
+				self.SOUND_TIMER = 5
+			self.SOUND_TIMER -= 1
 			self.PREV = "LEFT"
 			WIN.blit(CAR_LEFT,(self.X,self.Y))
 			WIN.blit(pygame.transform.rotate(WHEEL,self.ANGLE),(self.X+37,self.Y+65))
@@ -200,22 +214,27 @@ def checkEvents():
 def checkCollision():
 	global SCORE
 	if COIN1.Y >= CAR1.Y and COIN1.Y+COIN_Y <= CAR1.Y+CAR_Y and COIN1.X >= CAR1.X and COIN1.X <= CAR1.X+CAR_X:
+		COIN_SOUND.play()
 		SCORE += 10
 		COIN1.Y = 0
 		COIN1.X = randint(0,X-COIN_X)
 	if COIN2.Y >= CAR1.Y and COIN2.Y+COIN_Y <= CAR1.Y+CAR_Y and COIN2.X >= CAR1.X and COIN2.X <= CAR1.X+CAR_X:
+		COIN_SOUND.play()
 		SCORE += 10
 		COIN2.Y = 0
 		COIN2.X = randint(0,X-COIN_X)
 	if COIN3.Y >= CAR1.Y and COIN3.Y+COIN_Y <= CAR1.Y+CAR_Y and COIN3.X >= CAR1.X and COIN3.X <= CAR1.X+CAR_X:
+		COIN_SOUND.play()
 		SCORE += 10
 		COIN3.Y = 0
 		COIN3.X = randint(0,X-COIN_X)
 	if COIN4.Y >= CAR1.Y and COIN4.Y+COIN_Y <= CAR1.Y+CAR_Y and COIN4.X >= CAR1.X and COIN4.X <= CAR1.X+CAR_X:
+		COIN_SOUND.play()
 		SCORE += 10
 		COIN4.Y = 0
 		COIN4.X = randint(0,X-COIN_X)
 	if COIN5.Y >= CAR1.Y and COIN5.Y+COIN_Y <= CAR1.Y+CAR_Y and COIN5.X >= CAR1.X and COIN5.X <= CAR1.X+CAR_X:
+		COIN_SOUND.play()
 		SCORE += 10
 		COIN5.Y = 0
 		COIN5.X = randint(0,X-COIN_X)
