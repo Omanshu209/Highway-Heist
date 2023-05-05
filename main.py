@@ -25,6 +25,9 @@ CONTROL_B_Y = 130
 RUN = True
 FPS = 30
 CLOCK = pygame.time.Clock()
+SCORE = 0
+FONT = pygame.font.SysFont("georgia",70,True)
+SCORE_TEXT = FONT.render(f"Score : {SCORE}",10,(205,156,201))
 
 # loading images
 BG = pygame.transform.scale(pygame.image.load("assets/images/bg.jpg"),(X,Y))
@@ -169,22 +172,16 @@ def displaySignBoards():
 	SB4.fall()
 	SB5.fall()
 	
-def displayControls():
+def displayControlsAndText():
+	global SCORE_TEXT
 	WIN.blit(CONTROL_L,(100,580))
 	WIN.blit(CONTROL_R,(970,580))
 	WIN.blit(CONTROL_B,(550,580))
-
-def UpdateGameWindow():
-	newFrame()
-	displayCoins()
-	displaySignBoards()
-	CAR1.move()
-	displayControls()
-	pygame.display.update()
-
-while RUN:
-	CLOCK.tick(FPS)
+	SCORE_TEXT = FONT.render(f"Score : {SCORE}",10,(205,156,201))
+	WIN.blit(SCORE_TEXT,(850,10))
 	
+def checkEvents():
+	global RUN
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			RUN = False
@@ -199,7 +196,42 @@ while RUN:
 			elif MX >= 540 and MX <= 650 and MY >= 570 and MY <= 720:
 				CAR1.LEFT = False
 				CAR1.RIGHT = False
-			
+				
+def checkCollision():
+	global SCORE
+	if COIN1.Y >= CAR1.Y and COIN1.Y+COIN_Y <= CAR1.Y+CAR_Y and COIN1.X >= CAR1.X and COIN1.X <= CAR1.X+CAR_X:
+		SCORE += 10
+		COIN1.Y = 0
+		COIN1.X = randint(0,X-COIN_X)
+	if COIN2.Y >= CAR1.Y and COIN2.Y+COIN_Y <= CAR1.Y+CAR_Y and COIN2.X >= CAR1.X and COIN2.X <= CAR1.X+CAR_X:
+		SCORE += 10
+		COIN2.Y = 0
+		COIN2.X = randint(0,X-COIN_X)
+	if COIN3.Y >= CAR1.Y and COIN3.Y+COIN_Y <= CAR1.Y+CAR_Y and COIN3.X >= CAR1.X and COIN3.X <= CAR1.X+CAR_X:
+		SCORE += 10
+		COIN3.Y = 0
+		COIN3.X = randint(0,X-COIN_X)
+	if COIN4.Y >= CAR1.Y and COIN4.Y+COIN_Y <= CAR1.Y+CAR_Y and COIN4.X >= CAR1.X and COIN4.X <= CAR1.X+CAR_X:
+		SCORE += 10
+		COIN4.Y = 0
+		COIN4.X = randint(0,X-COIN_X)
+	if COIN5.Y >= CAR1.Y and COIN5.Y+COIN_Y <= CAR1.Y+CAR_Y and COIN5.X >= CAR1.X and COIN5.X <= CAR1.X+CAR_X:
+		SCORE += 10
+		COIN5.Y = 0
+		COIN5.X = randint(0,X-COIN_X)
+
+def UpdateGameWindow():
+	newFrame()
+	displayCoins()
+	displaySignBoards()
+	CAR1.move()
+	displayControlsAndText()
+	pygame.display.update()
+
+while RUN:
+	CLOCK.tick(FPS)
+	checkEvents()
+	checkCollision()
 	UpdateGameWindow()
 
 pygame.quit()
