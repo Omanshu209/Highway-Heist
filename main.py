@@ -178,7 +178,7 @@ def displayControlsAndText():
 	WIN.blit(CONTROL_R,(970,580))
 	WIN.blit(CONTROL_B,(550,580))
 	SCORE_TEXT = FONT.render(f"Score : {SCORE}",10,(205,156,201))
-	WIN.blit(SCORE_TEXT,(850,10))
+	WIN.blit(SCORE_TEXT,(810,10))
 	
 def checkEvents():
 	global RUN
@@ -219,6 +219,26 @@ def checkCollision():
 		SCORE += 10
 		COIN5.Y = 0
 		COIN5.X = randint(0,X-COIN_X)
+	if SB1.Y >= CAR1.Y and SB1.Y+SB_Y <= CAR1.Y+CAR_Y and SB1.X >= CAR1.X and SB1.X <= CAR1.X+CAR_X:
+		SCORE -= 50
+		SB1.Y = 0
+		SB1.X = randint(0,X-SB_X)
+	if SB2.Y >= CAR1.Y and SB2.Y+SB_Y <= CAR1.Y+CAR_Y and SB2.X >= CAR1.X and SB2.X <= CAR1.X+CAR_X:
+		SCORE -= 50
+		SB2.Y = 0
+		SB2.X = randint(0,X-SB_X)
+	if SB3.Y >= CAR1.Y and SB3.Y+SB_Y <= CAR1.Y+CAR_Y and SB3.X >= CAR1.X and SB3.X <= CAR1.X+CAR_X:
+		SCORE -= 50
+		SB3.Y = 0
+		SB3.X = randint(0,X-SB_X)
+	if SB4.Y >= CAR1.Y and SB4.Y+SB_Y <= CAR1.Y+CAR_Y and SB4.X >= CAR1.X and SB4.X <= CAR1.X+CAR_X:
+		SCORE -= 50
+		SB4.Y = 0
+		SB4.X = randint(0,X-SB_X)
+	if SB5.Y >= CAR1.Y and SB5.Y+SB_Y <= CAR1.Y+CAR_Y and SB5.X >= CAR1.X and SB5.X <= CAR1.X+CAR_X:
+		SCORE -= 50
+		SB5.Y = 0
+		SB5.X = randint(0,X-SB_X)
 
 def UpdateGameWindow():
 	newFrame()
