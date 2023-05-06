@@ -23,11 +23,13 @@ CONTROL_L_Y = 105
 CONTROL_B_X = 90
 CONTROL_B_Y = 130
 RUN = True
-FPS = 30
+FPS = 50
 CLOCK = pygame.time.Clock()
 SCORE = 0
 FONT = pygame.font.SysFont("georgia",70,True)
 SCORE_TEXT = FONT.render(f"Score : {SCORE}",10,(205,156,201))
+FONT2 = pygame.font.SysFont("georgia",10,True)
+DEVELOPER_TEXT = FONT2.render("Developed By Omanshu",10,(0,50,255))
 
 # loading images
 BG = pygame.transform.scale(pygame.image.load("assets/images/bg.jpg"),(X,Y))
@@ -193,6 +195,7 @@ def displayControlsAndText():
 	WIN.blit(CONTROL_B,(550,580))
 	SCORE_TEXT = FONT.render(f"Score : {SCORE}",10,(205,156,201))
 	WIN.blit(SCORE_TEXT,(810,10))
+	WIN.blit(DEVELOPER_TEXT,(10,10))
 	
 def checkEvents():
 	global RUN
