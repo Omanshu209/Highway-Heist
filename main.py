@@ -222,6 +222,7 @@ def displayControlsAndText():
 	WIN.blit(CONTROL_B,(550,580))
 	SCORE_TEXT = FONT.render(f"Score : {SCORE}",10,(205,156,201))
 	WIN.blit(SCORE_TEXT,(810,30))
+	pygame.draw.line(WIN,(0, 255, 0),(800,40),(1150, 40),3)
 	WIN.blit(DEVELOPER_TEXT,(10,10))
 	HIGH_SCORE_TEXT = FONT3.render(f"High Score : {HIGH_SCORE}",10,(160,120,220))
 	WIN.blit(HIGH_SCORE_TEXT,(840,5))
