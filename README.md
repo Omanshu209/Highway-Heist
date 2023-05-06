@@ -3,13 +3,13 @@ This is a game developed using the Pygame library. The objective of the game is 
 
 ## Installation
 Before running the game, Pygame library needs to be installed. Pygame can be installed using the following command:
-
+```
 pip install pygame
-
+```
 After Pygame is installed, download the game files and run the game by running the following command in the directory where the game files are located:
-
-python game.py
-
+```
+python3 main.py
+```
 ## How to Play
 Press the left arrow button to move the car to the left.
 
@@ -29,4 +29,4 @@ Collect as many coins as possible while avoiding the sign boards. The score will
 ```assets/HighScore.txt```: This file contains the high score achieved in the game.
 
 ## Credits
-This game was developed by Omanshu.
+This game was developed by **Omanshu**.
