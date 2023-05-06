@@ -52,7 +52,7 @@ COIN_SOUND = pygame.mixer.Sound("assets/audios/Coin.wav")
 WIN = pygame.display.set_mode((X,Y))
 
 # setting the caption of the window
-pygame.display.set_caption("Car Controlling Game!")
+pygame.display.set_caption("Highway Heist!")
 
 # creating a class 'coin'
 class coin:
@@ -79,13 +79,13 @@ class sb:
 	def __init__(self):
 		self.X = randint(0,X-SB_X)
 		self.Y = randint(0,400)
-		self.SPEED = randint(1,20)/30
+		self.SPEED = randint(1,20)/20
 		
 	def fall(self):
 		if self.Y >= Y-SB_Y:
 			self.X = randint(0,X-SB_X)
 			self.Y = 0
-			self.SPEED = randint(1,20)/30
+			self.SPEED = randint(1,20)/20
 		WIN.blit(SB,(self.X,self.Y))
 		self.Y += self.SPEED
 		# uncomment the next line to view the hitbox of the sign board
