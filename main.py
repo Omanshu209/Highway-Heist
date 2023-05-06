@@ -3,6 +3,31 @@ from random import randint
 
 pygame.init()
 
+# a function to set the high score
+def setHighScore(newHighScore):
+	global HIGH_SCORE
+	HIGH_SCORE = newHighScore
+	FILE = open("assets/HighScore.txt",'w')
+	FILE.write(str(newHighScore))
+	FILE.close()
+
+# a function to get the high score
+def getHighScore():
+	global HIGH_SCORE
+	try:
+		FILE = open("assets/HighScore.txt",'r')
+		HIGH_SCORE = int(FILE.read())
+		FILE.close()
+	except:
+		FILE = open("assets/HighScore.txt",'w')
+		FILE.write('0')
+		FILE.close()
+		FILE = open("assets/HighScore.txt",'r')
+		HIGH_SCORE = int(FILE.read())
+		FILE.close()
+	
+getHighScore()
+
 # declaring variables
 X = 1200
 Y = 720
@@ -30,6 +55,8 @@ FONT = pygame.font.SysFont("georgia",70,True)
 SCORE_TEXT = FONT.render(f"Score : {SCORE}",10,(205,156,201))
 FONT2 = pygame.font.SysFont("georgia",10,True)
 DEVELOPER_TEXT = FONT2.render("Developed By Omanshu",10,(0,50,255))
+FONT3 = pygame.font.SysFont("georgia",30,True)
+HIGH_SCORE_TEXT = FONT3.render(f"High Score : {HIGH_SCORE}",10,(160,120,220))
 
 # loading images
 BG = pygame.transform.scale(pygame.image.load("assets/images/bg.jpg"),(X,Y))
@@ -194,8 +221,10 @@ def displayControlsAndText():
 	WIN.blit(CONTROL_R,(970,580))
 	WIN.blit(CONTROL_B,(550,580))
 	SCORE_TEXT = FONT.render(f"Score : {SCORE}",10,(205,156,201))
-	WIN.blit(SCORE_TEXT,(810,10))
+	WIN.blit(SCORE_TEXT,(810,30))
 	WIN.blit(DEVELOPER_TEXT,(10,10))
+	HIGH_SCORE_TEXT = FONT3.render(f"High Score : {HIGH_SCORE}",10,(160,120,220))
+	WIN.blit(HIGH_SCORE_TEXT,(840,5))
 	
 def checkEvents():
 	global RUN
@@ -261,6 +290,8 @@ def checkCollision():
 		SCORE -= 50
 		SB5.Y = 0
 		SB5.X = randint(0,X-SB_X)
+	if SCORE > HIGH_SCORE:
+		setHighScore(SCORE)
 
 def UpdateGameWindow():
 	newFrame()
