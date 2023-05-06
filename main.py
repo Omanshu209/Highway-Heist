@@ -48,7 +48,7 @@ CONTROL_L_Y = 105
 CONTROL_B_X = 90
 CONTROL_B_Y = 130
 RUN = True
-FPS = 50
+FPS = 50#if the game runs too slow or too fast, change the value of this variable
 CLOCK = pygame.time.Clock()
 SCORE = 0
 FONT = pygame.font.SysFont("georgia",70,True)
@@ -196,25 +196,29 @@ SB5 = sb()
 # creating an object of class 'car'
 CAR1 = car()
 
+# a function to redraw the window each time a new frame appears
 def newFrame():
 	WIN.fill((0,0,0))
 	pygame.draw.rect(WIN,(0,255,0),(0,0,X+3,Y+3),3)
 	WIN.blit(BG,(0,0))
-	
+
+# a function to call the fall() method of the objects of class 'coin'
 def displayCoins():
 	COIN1.fall()
 	COIN2.fall()
 	COIN3.fall()
 	COIN4.fall()
 	COIN5.fall()
-	
+
+# a function to call the fall() method of the objects of class 'sb'
 def displaySignBoards():
 	SB1.fall()
 	SB2.fall()
 	SB3.fall()
 	SB4.fall()
 	SB5.fall()
-	
+
+# a function to display the controls and texts on the screen	
 def displayControlsAndText():
 	global SCORE_TEXT
 	WIN.blit(CONTROL_L,(100,580))
@@ -227,6 +231,7 @@ def displayControlsAndText():
 	HIGH_SCORE_TEXT = FONT3.render(f"High Score : {HIGH_SCORE}",10,(160,120,220))
 	WIN.blit(HIGH_SCORE_TEXT,(840,5))
 	
+# a function to check for any user inputs or interactions
 def checkEvents():
 	global RUN
 	for event in pygame.event.get():
@@ -243,7 +248,8 @@ def checkEvents():
 			elif MX >= 540 and MX <= 650 and MY >= 570 and MY <= 720:
 				CAR1.LEFT = False
 				CAR1.RIGHT = False
-				
+
+# a function to check whether the coins and the sign boards have collided with the car or not	
 def checkCollision():
 	global SCORE
 	if COIN1.Y >= CAR1.Y and COIN1.Y+COIN_Y <= CAR1.Y+CAR_Y and COIN1.X >= CAR1.X and COIN1.X <= CAR1.X+CAR_X:
@@ -302,6 +308,7 @@ def UpdateGameWindow():
 	displayControlsAndText()
 	pygame.display.update()
 
+# the mainloop
 while RUN:
 	CLOCK.tick(FPS)
 	checkEvents()
