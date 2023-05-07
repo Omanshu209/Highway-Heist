@@ -1,8 +1,7 @@
 # Highway Heist!
 This is a game developed using the Pygame library. The objective of the game is to collect coins while avoiding the sign boards. The car can be controlled using the arrow keys[which are available on the screen(It works on screen touch and not using a keyboard)]. The score increases with each coin collected.
 
-![Screenshot_2023-05-06-14-51-49-384](https://user-images.githubusercontent.com/114089324/236615983-af05c0c3-8936-4d7c-923a-84dfed19b451.jpeg)
-
+![Screenshot_2023-05-07-12-40-46-737](https://user-images.githubusercontent.com/114089324/236663273-e3f641e5-ac0e-4ecd-9b53-4f6483a5e706.jpeg)
 
 ## Installation
 Before running the game, Pygame library needs to be installed. Pygame can be installed using the following command:
