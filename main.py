@@ -1,5 +1,6 @@
 import pygame
 from random import randint
+from time import sleep
 
 pygame.init()
 
@@ -47,19 +48,29 @@ CONTROL_L_X = 150
 CONTROL_L_Y = 105
 CONTROL_B_X = 90
 CONTROL_B_Y = 130
+HEART_X = 50
+HEART_Y = 50
+HEART_POS_X = 10
+HEART_POS_Y = 0
 RUN = True
+TIME = 10
 FPS = 50#if the game runs too slow or too fast, change the value of this variable
 CLOCK = pygame.time.Clock()
 SCORE = 0
+LIVES = 3
 FONT = pygame.font.SysFont("georgia",70,True)
 SCORE_TEXT = FONT.render(f"Score : {SCORE}",10,(205,156,201))
 FONT2 = pygame.font.SysFont("georgia",10,True)
 DEVELOPER_TEXT = FONT2.render("Developed By Omanshu",10,(0,50,255))
 FONT3 = pygame.font.SysFont("georgia",30,True)
 HIGH_SCORE_TEXT = FONT3.render(f"High Score : {HIGH_SCORE}",10,(160,120,220))
+FONT4 = pygame.font.SysFont("georgia",200,True)
+FINAL_SCORE_TEXT = FONT4.render(f"Score : {SCORE}",10,(255,0,0))
+TIME_LEFT_TEXT = FONT3.render(f"Next game starts in {TIME} seconds",10,(0,0,255))
 
 # loading images
 BG = pygame.transform.scale(pygame.image.load("assets/images/bg.jpg"),(X,Y))
+BG2 = pygame.transform.scale(pygame.image.load("assets/images/bg2.jpeg"),(X,Y))
 COIN = pygame.transform.scale(pygame.image.load("assets/images/coin.png"),(COIN_X,COIN_Y))
 SB = pygame.transform.scale(pygame.image.load("assets/images/danger.png"),(SB_X,SB_Y))# SB -> Sign Board
 CAR_RIGHT = pygame.transform.scale(pygame.image.load("assets/images/carRight.png"),(CAR_X,CAR_Y))
@@ -70,6 +81,7 @@ WHEEL = pygame.transform.scale(pygame.image.load("assets/images/wheel.png"),(WHE
 CONTROL_R = pygame.transform.scale(pygame.image.load("assets/images/right.png"),(CONTROL_R_X,CONTROL_R_Y))
 CONTROL_L = pygame.transform.scale(pygame.image.load("assets/images/left.png"),(CONTROL_L_X,CONTROL_L_Y))
 CONTROL_B = pygame.transform.scale(pygame.image.load("assets/images/break.png"),(CONTROL_B_X,CONTROL_B_Y))
+HEART = pygame.transform.scale(pygame.image.load("assets/images/heart.png"),(HEART_X,HEART_Y))
 
 # loading audios
 ENGINE_SOUND = pygame.mixer.Sound("assets/audios/EngineSound.ogg")
@@ -218,6 +230,34 @@ def displaySignBoards():
 	SB4.fall()
 	SB5.fall()
 
+# checks if the user has lost the gane or not
+def checkGameEnd():
+	global SCORE,LIVES,FINAL_SCORE_TEXT,TIME,TIME_LEFT_TEXT
+	if LIVES <= 0:
+		while True:
+			if TIME <= 0 :
+				break
+			TIME_LEFT_TEXT = FONT3.render(f"Next game starts in {TIME} seconds",10,(0,0,255))
+			WIN.blit(BG2,(0,0))
+			FINAL_SCORE_TEXT = FONT4.render(f"Score : {SCORE}",10,(255,0,0))
+			WIN.blit(FINAL_SCORE_TEXT,(100,250))
+			WIN.blit(TIME_LEFT_TEXT,(300,500))
+			pygame.display.update()
+			TIME -= 1
+			sleep(1)
+		CAR1.X = 0
+		TIME = 10
+		LIVES = 3
+		SCORE = 0
+
+# a function to display the lives the user has(by displaying the number of hearts)	
+def displayLives():
+	global HEART_POS_X
+	for i in range(LIVES):
+		WIN.blit(HEART,(HEART_POS_X,HEART_POS_Y))
+		HEART_POS_X += 60
+	HEART_POS_X = 10
+
 # a function to display the controls and texts on the screen	
 def displayControlsAndText():
 	global SCORE_TEXT
@@ -227,7 +267,7 @@ def displayControlsAndText():
 	SCORE_TEXT = FONT.render(f"Score : {SCORE}",10,(205,156,201))
 	WIN.blit(SCORE_TEXT,(810,30))
 	pygame.draw.line(WIN,(0, 255, 0),(800,40),(1150, 40),3)
-	WIN.blit(DEVELOPER_TEXT,(10,10))
+	WIN.blit(DEVELOPER_TEXT,(10,700))
 	HIGH_SCORE_TEXT = FONT3.render(f"High Score : {HIGH_SCORE}",10,(160,120,220))
 	WIN.blit(HIGH_SCORE_TEXT,(840,5))
 	
@@ -251,7 +291,7 @@ def checkEvents():
 
 # a function to check whether the coins and the sign boards have collided with the car or not	
 def checkCollision():
-	global SCORE
+	global SCORE,LIVES
 	if COIN1.Y >= CAR1.Y and COIN1.Y+COIN_Y <= CAR1.Y+CAR_Y and COIN1.X >= CAR1.X and COIN1.X <= CAR1.X+CAR_X:
 		COIN_SOUND.play()
 		SCORE += 10
@@ -278,23 +318,23 @@ def checkCollision():
 		COIN5.Y = 0
 		COIN5.X = randint(0,X-COIN_X)
 	if SB1.Y >= CAR1.Y and SB1.Y+SB_Y <= CAR1.Y+CAR_Y and SB1.X >= CAR1.X and SB1.X <= CAR1.X+CAR_X:
-		SCORE -= 50
+		LIVES -= 1
 		SB1.Y = 0
 		SB1.X = randint(0,X-SB_X)
 	if SB2.Y >= CAR1.Y and SB2.Y+SB_Y <= CAR1.Y+CAR_Y and SB2.X >= CAR1.X and SB2.X <= CAR1.X+CAR_X:
-		SCORE -= 50
+		LIVES -= 1
 		SB2.Y = 0
 		SB2.X = randint(0,X-SB_X)
 	if SB3.Y >= CAR1.Y and SB3.Y+SB_Y <= CAR1.Y+CAR_Y and SB3.X >= CAR1.X and SB3.X <= CAR1.X+CAR_X:
-		SCORE -= 50
+		LIVES -= 1
 		SB3.Y = 0
 		SB3.X = randint(0,X-SB_X)
 	if SB4.Y >= CAR1.Y and SB4.Y+SB_Y <= CAR1.Y+CAR_Y and SB4.X >= CAR1.X and SB4.X <= CAR1.X+CAR_X:
-		SCORE -= 50
+		LIVES -= 1
 		SB4.Y = 0
 		SB4.X = randint(0,X-SB_X)
 	if SB5.Y >= CAR1.Y and SB5.Y+SB_Y <= CAR1.Y+CAR_Y and SB5.X >= CAR1.X and SB5.X <= CAR1.X+CAR_X:
-		SCORE -= 50
+		LIVES -= 1
 		SB5.Y = 0
 		SB5.X = randint(0,X-SB_X)
 	if SCORE > HIGH_SCORE:
@@ -302,8 +342,10 @@ def checkCollision():
 
 def UpdateGameWindow():
 	newFrame()
+	checkGameEnd()
 	displayCoins()
 	displaySignBoards()
+	displayLives()
 	CAR1.move()
 	displayControlsAndText()
 	pygame.display.update()
