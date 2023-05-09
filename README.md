@@ -24,7 +24,7 @@ python3 main.py
 > Each player has 3 lives and he/she loses 1 live after colliding with a sign board (if the player collides with 3 sign boards, the game ends).
 
 ## Files
-```game.py```: This is the main game file.
+```main.py```: This is the main game file.
 
 ```assets/images```: This directory contains the images used in the game.
 
