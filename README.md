@@ -32,5 +32,7 @@ python3 main.py
 
 ```assets/HighScore.txt```: This file contains the high score achieved in the game.
 
+```assets/data.json```: This fike contains the data for training the AI in the all new AI mode.
+
 ## Credits
 This game was developed by **Omanshu**.
