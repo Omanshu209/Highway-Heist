@@ -1,6 +1,8 @@
 # Highway Heist !
 This is a game developed using the Pygame library. The objective of the game is to collect coins while avoiding the sign boards. The car can be controlled using the arrow keys[which are available on the screen(It works on screen touch and not using a keyboard)]. The score increases with each coin collected. Each player has 3 lives and he/she loses 1 live after colliding with a sign board (if the player collides with 3 sign boards, the game ends).
 
+[**NOTE** : A new feature, **AI mode(Random Forest Classifier)**, has been introduced and is still in development phase]
+
 ![Screenshot_2023-05-07-12-40-46-737](https://user-images.githubusercontent.com/114089324/236663273-e3f641e5-ac0e-4ecd-9b53-4f6483a5e706.jpeg)
 
 ## Installation
@@ -11,6 +13,15 @@ pip install pygame
 After Pygame is installed, download the game files and run the game by running the following command in the directory where the game files are located:
 ```
 python3 main.py
+```
+## Installation - AI mode enabled game(Still in development phase)
+If you want to play the all new AI mode, which is still in development phase, then you have to install the scikit-learn and pandas module also:
+```
+pip install scikit-learn pandas pygame
+```
+Then run the following command:
+```
+python3 main_AI.py
 ```
 ## How to Play
 > Press the left arrow button to move the car to the left.
