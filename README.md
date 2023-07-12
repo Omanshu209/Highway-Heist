@@ -37,7 +37,7 @@ python3 main_AI.py
 ## Files
 ```main.py```: This is the main game file(Doesnt has AI mode).
 
-```main_AI.py```: This is the AI game file.
+```main_AI.py```: This is the AI game file(Still in development).
 
 ```assets/images```: This directory contains the images used in the game.
 
@@ -45,7 +45,7 @@ python3 main_AI.py
 
 ```assets/HighScore.txt```: This file contains the high score achieved in the game.
 
-```assets/data.json```: This fike contains the data for training the AI in the all new AI mode.
+```assets/data.json```: This file contains the data for training the AI in the all new AI mode.
 
 ## Credits
 This game was developed by **Omanshu**.
