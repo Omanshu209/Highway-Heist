@@ -23,24 +23,19 @@ pygame.init()
 def setHighScore(newHighScore):
 	global HIGH_SCORE
 	HIGH_SCORE = newHighScore
-	FILE = open("assets/HighScore.txt",'w')
-	FILE.write(str(newHighScore))
-	FILE.close()
+	with open("assets/HighScore.txt",'w') as FILE:
+		FILE.write(str(newHighScore))
 
 # a function to get the high score
 def getHighScore():
 	global HIGH_SCORE
 	try:
-		FILE = open("assets/HighScore.txt",'r')
-		HIGH_SCORE = int(FILE.read())
-		FILE.close()
-	except:
-		FILE = open("assets/HighScore.txt",'w')
-		FILE.write('0')
-		FILE.close()
-		FILE = open("assets/HighScore.txt",'r')
-		HIGH_SCORE = int(FILE.read())
-		FILE.close()
+		with open("assets/HighScore.txt",'r') as FILE:
+			HIGH_SCORE = int(FILE.read())
+	except Exception:
+		with open("assets/HighScore.txt",'w') as FILE:
+			FILE.write('0')
+			HIGH_SCORE = 0
 	
 getHighScore()
 
