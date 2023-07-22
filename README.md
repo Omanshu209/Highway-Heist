@@ -17,6 +17,10 @@ python3 main.py
 ## Installation - AI mode enabled game(Still in development phase)
 If you want to play the all new AI mode, which is still in development phase, then you have to install the `scikit-learn` and `pandas` library also:
 ```
+pip install -r requirements.txt
+```
+**OR**
+```
 pip install scikit-learn==1.0 pandas==1.3.3 pygame==2.0.1
 ```
 Then run the following command:
