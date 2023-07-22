@@ -43,6 +43,8 @@ python3 main_AI.py
 
 ```main_AI.py```: This is the AI game file(Still in development).
 
+```requirements.txt```: This is the requirements file.
+
 ```assets/images```: This directory contains the images used in the game.
 
 ```assets/audios```: This directory contains the audio files used in the game.
@@ -50,8 +52,6 @@ python3 main_AI.py
 ```assets/HighScore.txt```: This file contains the high score achieved in the game.
 
 ```assets/data.json```: This file contains the data for training the AI in the all new AI mode.
-
-```requirements.txt```: requirements file.
 
 ## Credits
 This game was developed by **Omanshu**.
