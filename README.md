@@ -51,5 +51,7 @@ python3 main_AI.py
 
 ```assets/data.json```: This file contains the data for training the AI in the all new AI mode.
 
+```requirements.txt```: requirements file.
+
 ## Credits
 This game was developed by **Omanshu**.
